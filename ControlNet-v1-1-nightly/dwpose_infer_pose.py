@@ -1,10 +1,10 @@
-from annotator.dwpose import DWposeDetector
+from annotator.dwpose import DWposeDetector2D
 import cv2
 import numpy as np
 c = 1
 
 if __name__ == "__main__":
-    pose = DWposeDetector()
+    pose = DWposeDetector2D()
 
     # Open the video file
     video_path = '/home/imw/Desktop/stefan_p_1/stefan_p_1_00000473.mp4'
