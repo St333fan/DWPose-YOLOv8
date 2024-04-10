@@ -10,7 +10,7 @@ os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
 import torch
 import numpy as np
 from . import util
-from .wholebody import Wholebody
+from .wholebody import Wholebody, Wholebody2D
 
 def draw_pose(pose, H, W):
     bodies = pose['bodies']
@@ -70,7 +70,7 @@ class DWposeDetector:
 class DWposeDetector2D:
     def __init__(self):
 
-        self.pose_estimation = Wholebody()
+        self.pose_estimation = Wholebody2D()
 
     def __call__(self, oriImg):
         oriImg = oriImg.copy()
