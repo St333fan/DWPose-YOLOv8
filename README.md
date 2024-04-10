@@ -17,14 +17,14 @@
 
 </div>
 
-#  💃🏻  Installing the 2D Extraction 💃🏻
+#  🟢  Installing the 2D Extraction 🟢
 ```
 # Set ControlNet environment
 conda env create -f environment.yaml
 conda activate control-v11
 pip install ultralytics
 ```
-## Important Files that got changed
+## 🟢 Important Files that got changed 🟢
 DWPose/ControlNet-v1-1-nightly/annotator/dwpose/__init__.py
 
 DWPose/ControlNet-v1-1-nightly/dwpose_infer_example.py
