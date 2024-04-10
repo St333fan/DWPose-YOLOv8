@@ -26,7 +26,9 @@ pip install ultralytics
 ```
 ## Important Files that got changed
 DWPose/ControlNet-v1-1-nightly/annotator/dwpose/__init__.py
+
 DWPose/ControlNet-v1-1-nightly/dwpose_infer_example.py
+
 DWPose/ControlNet-v1-1-nightly/annotator/dwpose/wholebody.py
 
 #  💃🏻  DWPose 💃🏻
