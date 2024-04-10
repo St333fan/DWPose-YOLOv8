@@ -18,7 +18,12 @@
 </div>
 
 #  💃🏻  Installing the 2D Extraction 💃🏻
-habdfjkdsbf
+```
+# Set ControlNet environment
+conda env create -f environment.yaml
+conda activate control-v11
+pip install ultralytics
+```
 ## sahbfasdf
 
 #  💃🏻  DWPose 💃🏻
