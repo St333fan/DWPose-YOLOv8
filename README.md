@@ -24,6 +24,8 @@ conda env create -f environment.yaml
 conda activate control-v11
 pip install ultralytics
 ```
+Download Pose model dw-ll_ucoco_384.onnx and put it into ControlNet-v1-1-nightly/annotator/ckpts. YOLOv8 automatically downloads the right model!
+
 ## 🟢 Important Files that got changed 🟢
 DWPose/ControlNet-v1-1-nightly/annotator/dwpose/__init__.py
 
