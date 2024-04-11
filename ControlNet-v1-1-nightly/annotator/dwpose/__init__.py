@@ -68,8 +68,9 @@ class DWposeDetector:
             return draw_pose(pose, H, W)
 
 class DWposeDetector2D:
-    def __init__(self, yolo_model='yolov8x.pt', classes=[0], tracker="botsort.yaml", conf=0.1, iou=0.5, persist=True, imgsz=1920, tracked_id=1):
+    def __init__(self, draw=True, yolo_model='yolov8x.pt', classes=[0], tracker="botsort.yaml", conf=0.1, iou=0.5, persist=True, imgsz=1920, tracked_id=1):
         self.pose_estimation = Wholebody2D(yolo_model=yolo_model, classes=classes, tracker=tracker, conf=conf, iou=iou, persist=persist, imgsz=imgsz, tracked_id=tracked_id)
+        self.draw = draw
 
     def __call__(self, oriImg):
         oriImg = oriImg.copy()
@@ -107,4 +108,11 @@ class DWposeDetector2D:
             bodies = dict(candidate=body, subset=score)
             pose = dict(bodies=bodies, hands=hands, faces=faces)
 
-            return draw_pose(pose, H, W), pose, body
+            if self.draw:
+                return draw_pose(pose, H, W), pose, body
+            else:
+                return None, pose, body
+
+    def update_draw(self):
+        self.draw = not self.draw
+

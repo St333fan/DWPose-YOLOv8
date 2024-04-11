@@ -61,11 +61,11 @@ class Wholebody2D:
         self.persist = persist
         self.imgsz = imgsz
         self.det_result = None
-        self.det_result_old = None
+        #self.det_result_old = None
 
     def __call__(self, oriImg):
         model_output = self.yolo_det.track(oriImg, classes=self.classes, tracker=self.tracker, conf=self.conf, iou=self.iou, persist=self.persist, imgsz=self.imgsz)
-        self.det_result = self.det_result_old
+        #self.det_result = self.det_result_old
 
         # Track the detected objects
         for r in model_output:
@@ -76,8 +76,9 @@ class Wholebody2D:
                     if self.tracked_id is not None and track_id == self.tracked_id:
                         self.det_result = box[0, :].data[:, 0:4].cpu().numpy()
 
-        self.det_result_old = self.det_result
+        #self.det_result_old = self.det_result
         self.det_result[0, 3] = self.det_result[0, 3] + 100
+
         keypoints, scores = inference_pose(self.session_pose, self.det_result, oriImg)
 
         keypoints_info = np.concatenate(

@@ -1,15 +1,17 @@
 from annotator.dwpose import DWposeDetector2D
 import cv2
 import numpy as np
-c = 1
+import matplotlib.pyplot as plt
+
+c = 0
 
 if __name__ == "__main__":
-    pose = DWposeDetector2D(yolo_model='yolov8l.pt', imgsz=1280, tracked_id=1)
+    pose = DWposeDetector2D(draw=True, yolo_model='yolov8x.pt', imgsz=1280, tracked_id=1)
 
 
     # Open the video file
-    video_path = '/home/imw-mmi/Documents/pilotfabrik-dataset/david_p_1/david_p_1_00000152.mp4'
-    np_path = 'david_p_1_00000152.npy'
+    video_path = '/home/imw-mmi/Documents/pilotfabrik-dataset/david_p_1/david_p_1_00000713.mp4'
+    np_path = 'david_p_1_00000713.npy'
 
     cap = cv2.VideoCapture(video_path)
 
@@ -59,18 +61,31 @@ if __name__ == "__main__":
             key_mmpose[:, 1] *= frame_height
             keypoints_all.append(key_mmpose)
 
+
             # Convert BGR image to RGB (matplotlib uses RGB)
             image_rgb = cv2.cvtColor(out, cv2.COLOR_BGR2RGB)
             # Write the frame to the output video
             out_vid.write(image_rgb)
 
+
             # Break the loop if 'q' is pressed
             if cv2.waitKey(1) & 0xFF == ord("q"):
                 break
 
-            c += 1
             if c > 10 and False:
                 break
+            elif c < 1:
+                # Convert BGR image to RGB (matplotlib uses RGB)
+                image_rgb = cv2.cvtColor(out, cv2.COLOR_BGR2RGB)
+                plt.figure(figsize=(10, 8))
+                plt.imshow(image_rgb)
+                plt.axis('off')
+                plt.title('Video Frame')
+                plt.show()
+                # pose.update_draw()
+
+            c += 1
+
 
         else:
             # Break the loop if the end of the video is reached
