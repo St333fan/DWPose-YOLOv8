@@ -33,8 +33,18 @@ DWPose/ControlNet-v1-1-nightly/dwpose_infer_example.py
 
 DWPose/ControlNet-v1-1-nightly/annotator/dwpose/wholebody.py
 
-process_FL_extern.py    --------------- but this into the Ergomaps main foulder
+process_FL_extern.py    --------------- but this into the Ergomaps main folder
 
+## 🟢 Run 2D extraction 🟢
+🔴 still in development, will get changed for easier usage 🔴
+
+dwpose_infer_example.py 🟡 change paths
+
+wholebody.py 🟡 change YOLO model and self.yolo_det.track() to desired configuration
+
+__init__.py 🟡 NO change needed, except if you want hand, foot and face keypoints
+
+process_FL_extern.py 🟡 change metadata and paths, and then you can lift the data into 3D
 
 
 #  💃🏻  DWPose 💃🏻
