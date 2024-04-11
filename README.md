@@ -33,7 +33,7 @@ DWPose/ControlNet-v1-1-nightly/dwpose_infer_example.py
 
 DWPose/ControlNet-v1-1-nightly/annotator/dwpose/wholebody.py
 
-process_FL_extern.py    --------------- put this into the Ergomaps main folder
+process_FL_extern.py    --------------- Put this into the Ergomaps main folder, only needed for 3D lifting
 
 ## 🟢 Run 2D extraction 🟢
 🔴 still in development, will get changed for easier usage 🔴
