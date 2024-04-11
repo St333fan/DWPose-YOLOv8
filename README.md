@@ -24,6 +24,15 @@ conda env create -f environment.yaml
 conda activate control-v11
 pip install ultralytics
 ```
+
+Second, install tools to apply DWPose to ControlNet. If it's hard to install onnxruntime, you can refer branch [opencv_onnx](https://github.com/IDEA-Research/DWPose/tree/opencv_onnx), which runs the onnx model with opencv.
+```
+# Set ControlNet environment
+pip install onnxruntime
+# if gpu is available
+pip install onnxruntime-gpu
+```
+
 Download Pose model dw-ll_ucoco_384.onnx and put it into ControlNet-v1-1-nightly/annotator/ckpts. YOLOv8 automatically downloads the right model!
 
 ## 🟢 Important Files that got changed 🟢
