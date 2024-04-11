@@ -4,12 +4,12 @@ import numpy as np
 c = 1
 
 if __name__ == "__main__":
-    pose = DWposeDetector2D()
+    pose = DWposeDetector2D(yolo_model='yolov8l.pt', imgsz=1280, tracked_id=1)
+
 
     # Open the video file
-    video_path = '/home/imw/Desktop/stefan_p_1/stefan_p_1_00000473.mp4'
-
-    output_path = '/home/imw/Desktop'
+    video_path = '/home/imw-mmi/Documents/pilotfabrik-dataset/david_p_1/david_p_1_00000152.mp4'
+    np_path = 'david_p_1_00000152.npy'
 
     cap = cv2.VideoCapture(video_path)
 
@@ -80,8 +80,9 @@ if __name__ == "__main__":
     cap.release()
     cv2.destroyAllWindows()
 
-kp = np.array(keypoints_all, dtype=np.float32).squeeze()
+    kp = np.array(keypoints_all, dtype=np.float32).squeeze()
+    np.save(np_path, kp)  # save
 
-np.save('stefan_p_1_00000473.npy', kp) # save
+
 
 

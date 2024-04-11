@@ -46,18 +46,26 @@ class Wholebody:
         return keypoints, scores
 
 class Wholebody2D:
-    def __init__(self):
+    def __init__(self, yolo_model='yolov8x.pt', classes=[0], tracker="botsort.yaml", conf=0.1, iou=0.5, persist=True, imgsz=1920, tracked_id=1):
         device = 'cuda:0'
-        providers = ['CPUExecutionProvider'
-                 ] if device == 'cpu' else ['CUDAExecutionProvider']
+        providers = ['CPUExecutionProvider'] if device == 'cpu' else ['CUDAExecutionProvider']
 
         onnx_pose = 'annotator/ckpts/dw-ll_ucoco_384.onnx'
-        self.yolo_det = YOLO('yolov8x.pt')
+        self.yolo_det = YOLO(yolo_model)
         self.session_pose = ort.InferenceSession(path_or_bytes=onnx_pose, providers=providers)
-        self.tracked_id = 1
+        self.tracked_id = tracked_id
+        self.classes = classes
+        self.tracker = tracker
+        self.conf = conf
+        self.iou = iou
+        self.persist = persist
+        self.imgsz = imgsz
+        self.det_result = None
+        self.det_result_old = None
 
     def __call__(self, oriImg):
-        model_output = self.yolo_det.track(oriImg, classes=[0], tracker="botsort.yaml", conf=0.1, iou=0.5, persist=True, imgsz=1920)
+        model_output = self.yolo_det.track(oriImg, classes=self.classes, tracker=self.tracker, conf=self.conf, iou=self.iou, persist=self.persist, imgsz=self.imgsz)
+        self.det_result = self.det_result_old
 
         # Track the detected objects
         for r in model_output:
@@ -66,11 +74,11 @@ class Wholebody2D:
                 if box.cls[0] == 0:
                     track_id = box.id
                     if self.tracked_id is not None and track_id == self.tracked_id:
-                        det_result = box[0, :].data[:, 0:4].cpu().numpy()
+                        self.det_result = box[0, :].data[:, 0:4].cpu().numpy()
 
-        det_result[0, 3] = det_result[0, 3] + 100
-
-        keypoints, scores = inference_pose(self.session_pose, det_result, oriImg)
+        self.det_result_old = self.det_result
+        self.det_result[0, 3] = self.det_result[0, 3] + 100
+        keypoints, scores = inference_pose(self.session_pose, self.det_result, oriImg)
 
         keypoints_info = np.concatenate(
             (keypoints, scores[..., None]), axis=-1)
