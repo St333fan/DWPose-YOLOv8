@@ -31,6 +31,10 @@ DWPose/ControlNet-v1-1-nightly/dwpose_infer_example.py
 
 DWPose/ControlNet-v1-1-nightly/annotator/dwpose/wholebody.py
 
+process_FL_extern.py    --------------- but this into the Ergomaps main foulder
+
+
+
 #  💃🏻  DWPose 💃🏻
 This repository is the official implementation of the [Effective Whole-body Pose Estimation with Two-stages Distillation](https://arxiv.org/abs/2307.15880) (ICCV 2023, CV4Metaverse Workshop). Our code is based on [MMPose](https://github.com/open-mmlab/mmpose/tree/main) and [ControlNet](https://github.com/lllyasviel/ControlNet-v1-1-nightly).
 
