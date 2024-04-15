@@ -46,7 +46,7 @@ class Wholebody:
         return keypoints, scores
 
 class Wholebody2D:
-    def __init__(self, yolo_model='yolov8x.pt', classes=[0], tracker="botsort.yaml", conf=0.1, iou=0.5, persist=True, imgsz=1920, tracked_id=1):
+    def __init__(self, yolo_model='yolov8x.pt', classes=[0], tracker="botsort.yaml", conf=0.1, iou=0.3, persist=True, imgsz=1920, tracked_id=1):
         device = 'cuda:0'
         providers = ['CPUExecutionProvider'] if device == 'cpu' else ['CUDAExecutionProvider']
 

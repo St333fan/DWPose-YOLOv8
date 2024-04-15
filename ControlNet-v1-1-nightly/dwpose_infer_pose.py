@@ -6,12 +6,13 @@ import matplotlib.pyplot as plt
 c = 0
 
 if __name__ == "__main__":
-    pose = DWposeDetector2D(draw=True, yolo_model='yolov8x.pt', imgsz=1280, tracked_id=1)
+    pose = DWposeDetector2D(draw=True, yolo_model='yolov8x.pt', imgsz=1920, tracked_id=1)
 
 
     # Open the video file
-    video_path = '/home/imw-mmi/Documents/pilotfabrik-dataset/david_p_1/david_p_1_00000713.mp4'
-    np_path = 'david_p_1_00000713.npy'
+    video_path = '/home/imw-mmi/Documents/pilotfabrik-dataset/patrick_p_2/patrick_p_2_00000613.mp4'
+    np_path = 'patrick_p_2_00000613.npy'
+    output_file = 'patrick_p_2_00000613.mp4'
 
     cap = cv2.VideoCapture(video_path)
 
@@ -22,7 +23,6 @@ if __name__ == "__main__":
 
     # Create a VideoWriter object
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # Codec for MP4 format
-    output_file = 'output_video.mp4'
     frame_size = (frame_width, frame_height)  # Width, Height
     out_vid = cv2.VideoWriter(output_file, fourcc, fps, frame_size)
 
