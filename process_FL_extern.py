@@ -3,7 +3,7 @@ import numpy as np
 Setup_environment()
 from hpe_wrapper import Wrapper_3Dpose
 
-model_3D = '/home/imw/PycharmProjects/ergomaps/VideoPose3D/checkpoint/pretrained_h36m_detectron_coco.bin'
+model_3D = '/home/imw-mmi/Projects/ErgoAll/ErgoMaps_Tutorial/VideoPose3D/checkpoint/pretrained_h36m_detectron_coco.bin'
 pose_3d = Wrapper_3Dpose(model_3D)
 
 # Video resolution
@@ -19,7 +19,9 @@ metadata['num_joints'] = 17
 metadata['keypoints_symmetry'] = [[1, 3, 5, 7, 9, 11, 13, 15], [2, 4, 6, 8, 10, 12, 14, 16]]
 metadata['video_metadata'] = {'data_2d': resolution}
 
-kp = np.load('/home/imw/PycharmProjects/DWPose/ControlNet-v1-1-nightly/stefan_p_1_00000473.npy')
+kp = np.load('/home/imw-mmi/Documents/pilotfabrik-dataset/2d_processed/david_p_4_00000423.npy')
+np_savepath = 'david_p_4_00000423.npy'
+video_savepath = "3D_result.mp4"
 
 # Create a blank image
 image = np.zeros((720, 1280, 3), dtype=np.uint8)
@@ -49,4 +51,7 @@ x = {
 }
 
 data_3d = pose_3d.predict_3D_poses(x, metadata)
-pose_3d.render_video_output(output_path="3D_result.mp4")
+np.save(np_savepath, kp)
+
+print('rendering... ')
+pose_3d.render_video_output(output_path=video_savepath)
