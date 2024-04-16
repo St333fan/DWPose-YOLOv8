@@ -51,7 +51,7 @@ x = {
 }
 
 data_3d = pose_3d.predict_3D_poses(x, metadata)
-np.save(np_savepath, kp)
+np.save(np_savepath, data_3d)
 
 print('rendering... ')
 pose_3d.render_video_output(output_path=video_savepath)
