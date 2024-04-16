@@ -7,12 +7,19 @@ c = 0
 
 if __name__ == "__main__":
     pose = DWposeDetector2D(draw=True, yolo_model='yolov8x.pt', imgsz=1920, tracked_id=1)
-
+    '''
+    If there are problems with the tracking:
+        imgsz --> 2400
+        yolo_model --> yolov8x.pt
+        bytetrack.yaml
+            0.6 to 0.7
+            0.8 to 1
+    '''
 
     # Open the video file
-    video_path = '/home/imw-mmi/Documents/pilotfabrik-dataset/patrick_p_2/patrick_p_2_00000613.mp4'
-    np_path = 'patrick_p_2_00000613.npy'
-    output_file = 'patrick_p_2_00000613.mp4'
+    video_path = '/home/imw-mmi/Documents/pilotfabrik-dataset/zed_cutted_for_better_extraction/david_p_3_zedcut_processed.mp4'
+    np_path = 'david_p_3_zedcut_processed.npy'
+    output_file = 'david_p_3_zedcut_processed.mp4'
 
     cap = cv2.VideoCapture(video_path)
 
@@ -20,6 +27,9 @@ if __name__ == "__main__":
     frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     fps = cap.get(cv2.CAP_PROP_FPS)
+
+    # Set the video position to the start frame
+    # cap.set(cv2.CAP_PROP_POS_FRAMES, ((2*60)+40)*30)
 
     # Create a VideoWriter object
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # Codec for MP4 format

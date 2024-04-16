@@ -46,7 +46,7 @@ class Wholebody:
         return keypoints, scores
 
 class Wholebody2D:
-    def __init__(self, yolo_model='yolov8x.pt', classes=[0], tracker="botsort.yaml", conf=0.1, iou=0.3, persist=True, imgsz=1920, tracked_id=1):
+    def __init__(self, yolo_model='yolov8x.pt', classes=[0], tracker="botsort.yaml", conf=0.1, iou=0.1, persist=True, imgsz=1920, tracked_id=1):
         device = 'cuda:0'
         providers = ['CPUExecutionProvider'] if device == 'cpu' else ['CUDAExecutionProvider']
 
@@ -61,6 +61,7 @@ class Wholebody2D:
         self.persist = persist
         self.imgsz = imgsz
         self.det_result = None
+        self.tracked_succesfull = False
         #self.det_result_old = None
 
     def __call__(self, oriImg):
@@ -74,9 +75,13 @@ class Wholebody2D:
                 if box.cls[0] == 0:
                     track_id = box.id
                     if self.tracked_id is not None and track_id == self.tracked_id:
-                        self.det_result = box[0, :].data[:, 0:4].cpu().numpy()
+                        self.det_result = box[0, :].data[:, 0:4].cpu().numpy().copy()
+                        self.tracked_succesfull = True
+                    else:
+                        self.tracked_succesfull = False
 
         #self.det_result_old = self.det_result
+        #if self.tracked_succesfull == True:
         self.det_result[0, 3] = self.det_result[0, 3] + 100
 
         keypoints, scores = inference_pose(self.session_pose, self.det_result, oriImg)
