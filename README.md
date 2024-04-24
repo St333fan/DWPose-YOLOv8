@@ -43,6 +43,7 @@ DWPose/ControlNet-v1-1-nightly/dwpose_infer_example.py
 DWPose/ControlNet-v1-1-nightly/annotator/dwpose/wholebody.py
 
 process_FL_extern.py    --------------- Put this into the Ergomaps main folder, only needed for 3D lifting
+interpolate.py    --------------------- used for interpolating when data has not expected length
 
 ## 🟢 Run 2D extraction 🟢
 🔴 still in development, will get changed for easier usage 🔴
